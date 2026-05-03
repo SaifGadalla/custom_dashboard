@@ -1,0 +1,10 @@
+{
+    "@@locale": "ar",
+    "hello": "مرحبا",
+    "reorder_columns": "إعادة ترتيب الأعمدة",
+    "cancel": "إلغاء",
+    "apply": "تطبيق",
+    "reset": "إعادة تعيين",
+    "actions": "الإجراءات",
+    "no_elements_to_display": "لا توجد عناصر لعرضها"
+}

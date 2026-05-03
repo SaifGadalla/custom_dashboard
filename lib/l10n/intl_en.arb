@@ -1,0 +1,10 @@
+{
+    "@@locale": "en",
+    "hello": "Hello",
+    "reorder_columns": "Reorder Columns",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "reset": "Reset",
+    "actions": "Actions",
+    "no_elements_to_display": "No elements to display"
+}
