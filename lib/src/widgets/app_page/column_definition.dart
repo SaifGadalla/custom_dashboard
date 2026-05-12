@@ -1,4 +1,4 @@
-import 'package:custom_dashboard/common.dart';
+import '../../../common.dart';
 
 class ColumnDefinition<T> extends DataColumn {
   const ColumnDefinition({

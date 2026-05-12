@@ -14,7 +14,7 @@ dependencies:
   go_router: 17.2.3
   google_fonts: 8.1.0
   intl: ^0.20.2
-  logger: ^2.7.0
+  logging: ^1.3.0
   injectable: ^3.0.0
   get_it: ^9.2.1
   flutter_screenutil: ^5.9.3
@@ -25,8 +25,22 @@ dependencies:
   fixnum: ^1.1.1
   collection: ^1.19.1
   responsive_builder: ^0.7.1
-  reactive_forms: ^18.2.2
-  reactive_forms_annotations: ^8.4.0
+  flutter_riverpod: ^3.3.1
+  riverpod: ^3.2.1
+  reactive_forms: ^17.0.1
+  reactive_forms_annotations: ^7.4.3
+  firebase_core: ^4.7.0
+  firebase_auth: ^6.4.0
+  firebase_storage: ^13.3.0
+  cloud_firestore: ^6.3.0
+  flutter_hooks: ^0.21.3+1
+  flutter_svg: ^2.3.0
+  cached_network_image: ^3.4.1
+  video_player: ^2.11.1
+  chewie: ^1.14.0
+  youtube_player_iframe: ^5.2.2
+  url_strategy: ^0.3.0
+  desktop_drop: ^0.7.1
 
 dev_dependencies:
   flutter_test:
@@ -38,5 +52,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/
+
 flutter_intl:
   enabled: true

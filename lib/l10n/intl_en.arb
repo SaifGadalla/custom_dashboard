@@ -6,5 +6,95 @@
     "apply": "Apply",
     "reset": "Reset",
     "actions": "Actions",
-    "no_elements_to_display": "No elements to display"
+    "no_elements_to_display": "No elements to display",
+    "search": "Search",
+    "articles": "Articles",
+    "article": "Article",
+    "services": "Services",
+    "service": "Service",
+    "welcome_back": "Welcome back",
+    "home_description": "Here's what's happening with your services and content today.",
+    "files": "Files",
+    "about_us": "About Us",
+    "categories": "Categories",
+    "category": "Category",
+    "edit": "Edit",
+    "vision": "Vision",
+    "mission": "Mission",
+    "qualifications": "Qualifications",
+    "qualification": "Qualification",
+    "experience": "Experience",
+    "description": "Description",
+    "add": "Add",
+    "see_more": "See more",
+    "add_success": "Add success",
+    "edit_success": "Edit success",
+    "delete_success": "Delete success",
+    "service_addition": "Service addition",
+    "service_editing": "Service editing",
+    "save": "Save",
+    "close": "Close",
+    "title": "Title",
+    "details": "Details",
+    "not_found": "Not Found",
+    "image": "Image",
+    "click_to_upload": "Click to upload",
+    "service_details": "Service details",
+    "service_details_addition": "Service details addition",
+    "service_details_editing": "Service details editing",
+    "service_details_delete": "Service details delete",
+    "article_addition": "Article addition",
+    "article_editing": "Article editing",
+    "item": "Item",
+    "clear": "Clear",
+    "content": "Content",
+    "delete": "Delete",
+    "drag_and_drop_description": "Drag and drop {value} here or",
+    "@drag_and_drop_description": {
+        "placeholders": {
+            "value": {
+                "type": "int"
+            }
+        }
+    },
+    "add_something_of": "Add {something}",
+    "@add_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "edit_something_of": "Edit {something}",
+    "@edit_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "delete_something_of": "Delete {something}",
+    "@delete_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "last_something_of": "Last {something}",
+    "@last_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "select_something_of": "Select {something}",
+    "@select_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    }
 }

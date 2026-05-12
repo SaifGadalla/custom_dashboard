@@ -1,5 +1,5 @@
-import 'package:custom_dashboard/common.dart';
-import 'package:custom_dashboard/generated/l10n.dart';
+import '../common.dart';
+import '../generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toastification/toastification.dart';
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      config: ToastificationConfig(alignment: Alignment.topCenter),
+      config: const ToastificationConfig(alignment: Alignment.bottomRight),
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) {

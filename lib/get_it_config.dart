@@ -1,8 +1,8 @@
 import 'common.dart';
 import 'get_it_config.config.dart';
 
-const realEnv = Environment('real');
-const testEnv = Environment('test');
+// const realEnv = Environment('real');
+// const testEnv = Environment('dev');
 const currentEnvironment = String.fromEnvironment('env');
 
 final getIt = GetIt.instance;

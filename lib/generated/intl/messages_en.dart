@@ -20,16 +20,88 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(something) => "Add ${something}";
+
+  static String m1(something) => "Delete ${something}";
+
+  static String m2(value) => "Drag and drop ${value} here or";
+
+  static String m3(something) => "Edit ${something}";
+
+  static String m4(something) => "Last ${something}";
+
+  static String m5(something) => "Select ${something}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about_us": MessageLookupByLibrary.simpleMessage("About Us"),
     "actions": MessageLookupByLibrary.simpleMessage("Actions"),
+    "add": MessageLookupByLibrary.simpleMessage("Add"),
+    "add_something_of": m0,
+    "add_success": MessageLookupByLibrary.simpleMessage("Add success"),
     "apply": MessageLookupByLibrary.simpleMessage("Apply"),
+    "article": MessageLookupByLibrary.simpleMessage("Article"),
+    "article_addition": MessageLookupByLibrary.simpleMessage(
+      "Article addition",
+    ),
+    "article_editing": MessageLookupByLibrary.simpleMessage("Article editing"),
+    "articles": MessageLookupByLibrary.simpleMessage("Articles"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "category": MessageLookupByLibrary.simpleMessage("Category"),
+    "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+    "click_to_upload": MessageLookupByLibrary.simpleMessage("Click to upload"),
+    "close": MessageLookupByLibrary.simpleMessage("Close"),
+    "content": MessageLookupByLibrary.simpleMessage("Content"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "delete_something_of": m1,
+    "delete_success": MessageLookupByLibrary.simpleMessage("Delete success"),
+    "description": MessageLookupByLibrary.simpleMessage("Description"),
+    "details": MessageLookupByLibrary.simpleMessage("Details"),
+    "drag_and_drop_description": m2,
+    "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "edit_something_of": m3,
+    "edit_success": MessageLookupByLibrary.simpleMessage("Edit success"),
+    "experience": MessageLookupByLibrary.simpleMessage("Experience"),
+    "files": MessageLookupByLibrary.simpleMessage("Files"),
     "hello": MessageLookupByLibrary.simpleMessage("Hello"),
+    "home_description": MessageLookupByLibrary.simpleMessage(
+      "Here\'s what\'s happening with your services and content today.",
+    ),
+    "image": MessageLookupByLibrary.simpleMessage("Image"),
+    "item": MessageLookupByLibrary.simpleMessage("Item"),
+    "last_something_of": m4,
+    "mission": MessageLookupByLibrary.simpleMessage("Mission"),
     "no_elements_to_display": MessageLookupByLibrary.simpleMessage(
       "No elements to display",
     ),
+    "not_found": MessageLookupByLibrary.simpleMessage("Not Found"),
+    "qualification": MessageLookupByLibrary.simpleMessage("Qualification"),
+    "qualifications": MessageLookupByLibrary.simpleMessage("Qualifications"),
     "reorder_columns": MessageLookupByLibrary.simpleMessage("Reorder Columns"),
     "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "search": MessageLookupByLibrary.simpleMessage("Search"),
+    "see_more": MessageLookupByLibrary.simpleMessage("See more"),
+    "select_something_of": m5,
+    "service": MessageLookupByLibrary.simpleMessage("Service"),
+    "service_addition": MessageLookupByLibrary.simpleMessage(
+      "Service addition",
+    ),
+    "service_details": MessageLookupByLibrary.simpleMessage("Service details"),
+    "service_details_addition": MessageLookupByLibrary.simpleMessage(
+      "Service details addition",
+    ),
+    "service_details_delete": MessageLookupByLibrary.simpleMessage(
+      "Service details delete",
+    ),
+    "service_details_editing": MessageLookupByLibrary.simpleMessage(
+      "Service details editing",
+    ),
+    "service_editing": MessageLookupByLibrary.simpleMessage("Service editing"),
+    "services": MessageLookupByLibrary.simpleMessage("Services"),
+    "title": MessageLookupByLibrary.simpleMessage("Title"),
+    "vision": MessageLookupByLibrary.simpleMessage("Vision"),
+    "welcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
   };
 }

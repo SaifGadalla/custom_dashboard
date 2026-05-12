@@ -1,13 +1,18 @@
-import 'package:custom_dashboard/common.dart';
-import 'package:custom_dashboard/src/app.dart';
+import 'common.dart';
+import 'src/app.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:url_strategy/url_strategy.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   getIt.allowReassignment = true;
   configureDependencies();
-  Logger.level = Level.all;
-  Logger.addLogListener((log) {
+  setPathUrlStrategy();
+  Logger.root.level = Level.ALL; // for full logging
+  Logger.root.onRecord.listen((log) {
     debugPrint('${log.level.name}: ${log.time}: ${log.message}');
   });
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }

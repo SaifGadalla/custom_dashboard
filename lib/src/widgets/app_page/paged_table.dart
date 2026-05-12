@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:custom_dashboard/common.dart';
+import '../../../common.dart';
 
 class PagedTable<T> extends StatefulWidget {
   const PagedTable({
@@ -12,7 +12,7 @@ class PagedTable<T> extends StatefulWidget {
     required this.rowActions,
   });
 
-  final PagingController<Int64, T> pagingController;
+  final PagingController<String?, T> pagingController;
   final List<ColumnDefinition<T>> columns;
   final List<Widget> Function(
     BuildContext context,
@@ -89,10 +89,10 @@ class _PagedTableState<T> extends State<PagedTable<T>> {
 
   String _columnDisplayName(int columnIndex) {
     final labelWidget = widget.columns[columnIndex].label;
-    //TODO: add after adding app text
-    // if (labelWidget is AppText) {
-    //   return labelWidget.text;
-    // }
+
+    if (labelWidget is AppText) {
+      return labelWidget.text;
+    }
     if (labelWidget is Text) {
       return labelWidget.data ?? 'Column ${columnIndex + 1}';
     }
@@ -237,7 +237,6 @@ class _PagedTableState<T> extends State<PagedTable<T>> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final isTabletOrLess = getValueForScreenType(
       context: context,
@@ -252,8 +251,8 @@ class _PagedTableState<T> extends State<PagedTable<T>> {
         .toList(growable: false);
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: colorScheme.primaryContainer),
+        borderRadius: BorderRadius.circular(kBorderRadius),
+        border: Border.all(color: ColorManager.surfaceActive),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -369,35 +368,34 @@ class _PagedTableState<T> extends State<PagedTable<T>> {
                   Container(
                     height: 56.0,
                     padding: const EdgeInsets.all(8.0),
-                    color: colorScheme.tertiary,
+                    color: ColorManager.surfaceLight,
                     child: Row(
                       spacing: 8,
                       children: [
-                        // TODO: add after adding app check box widget
-                        // SizedBox(
-                        //   width: _checkboxColumnWidth,
-                        //   child: ValueListenableBuilder(
-                        //     valueListenable: widget.pagingController,
-                        //     builder: (context, value, child) => AppCheckBox(
-                        //       tristate: true,
-                        //       checkBoxValue: selectedItems.isEmpty
-                        //           ? false
-                        //           : selectedItems.length ==
-                        //                 (value.items?.length ?? 0)
-                        //           ? true
-                        //           : null,
-                        //       onChanged: (newValue) => setState(() {
-                        //         if (newValue == true) {
-                        //           selectedItems = List<T>.from(
-                        //             value.items ?? [],
-                        //           );
-                        //         } else {
-                        //           selectedItems.clear();
-                        //         }
-                        //       }),
-                        //     ),
-                        //   ),
-                        // ),
+                        SizedBox(
+                          width: _checkboxColumnWidth,
+                          child: ValueListenableBuilder(
+                            valueListenable: widget.pagingController,
+                            builder: (context, value, child) => AppCheckBox(
+                              tristate: true,
+                              checkBoxValue: selectedItems.isEmpty
+                                  ? false
+                                  : selectedItems.length ==
+                                        (value.items?.length ?? 0)
+                                  ? true
+                                  : null,
+                              onChanged: (newValue) => setState(() {
+                                if (newValue == true) {
+                                  selectedItems = List<T>.from(
+                                    value.items ?? [],
+                                  );
+                                } else {
+                                  selectedItems.clear();
+                                }
+                              }),
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: _SyncedHorizontalScroll(
                             offsetNotifier: _horizontalOffset,
@@ -441,8 +439,8 @@ class _PagedTableState<T> extends State<PagedTable<T>> {
                                                   alignment: Alignment.center,
                                                   child: Container(
                                                     width: 1,
-                                                    color: colorScheme
-                                                        .outlineVariant,
+                                                    color: ColorManager
+                                                        .surfaceActive,
                                                   ),
                                                 ),
                                               ),
@@ -459,115 +457,104 @@ class _PagedTableState<T> extends State<PagedTable<T>> {
                         ),
                         SizedBox(
                           width: _actionsColumnWidth,
-                          // TODO: add after adding app text
-                          // child: AppText(
-                          //   l10n.actions,
-                          //   style: displayExtraSmallRegular,
-                          // ),
-                          child: Text(l10n.actions),
+                          child: AppText(
+                            l10n.actions,
+                            style: textTheme.bodySmall,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   PagingListener(
                     controller: widget.pagingController,
-                    builder: (context, state, fetchNextPage) =>
-                        PagedListView<Int64, T>(
-                          shrinkWrap: true,
-                          state: state,
-                          fetchNextPage: fetchNextPage,
-                          builderDelegate: PagedChildBuilderDelegate<T>(
-                            noItemsFoundIndicatorBuilder: (context) => Center(
-                              child: Text(l10n.no_elements_to_display),
-                            ),
-                            itemBuilder: (context, item, index) => Container(
-                              height: 60,
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: colorScheme.outlineVariant,
-                                  ),
-                                ),
-                              ),
-                              child: Row(
-                                spacing: 8,
-                                children: [
-                                  // TODO: add after adding app check box widget
-                                  // SizedBox(
-                                  //   width: _checkboxColumnWidth,
-                                  //   child: AppCheckBox(
-                                  //     checkBoxValue: selectedItems.contains(
-                                  //       item,
-                                  //     ),
-                                  //     onChanged: (newValue) => setState(() {
-                                  //       if (newValue == true) {
-                                  //         selectedItems.add(item);
-                                  //       } else {
-                                  //         selectedItems.remove(item);
-                                  //       }
-                                  //     }),
-                                  //   ),
-                                  // ),
-                                  Expanded(
-                                    child: _SyncedHorizontalScroll(
-                                      offsetNotifier: _horizontalOffset,
-                                      child: SizedBox(
-                                        width: dataSectionWidth,
-                                        child: Row(
-                                          spacing: _columnSpacing,
-                                          children: [
-                                            ...orderedColumns.indexed.map(
-                                              (entry) => SizedBox(
-                                                width:
-                                                    effectiveWidths[entry.$1],
-                                                child: entry.$2
-                                                    .cellInfoAccessor(item),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: _actionsColumnWidth,
-                                    child:
-                                        PopupMenuButton<
-                                          FutureOr<void> Function(T)?
-                                        >(
-                                          tooltip: l10n.actions,
-                                          color: colorScheme.surface,
-                                          onSelected: (value) =>
-                                              value?.call(item),
-                                          itemBuilder: (context) =>
-                                              widget.rowActions.map((a) {
-                                                final enabled =
-                                                    a.isEnabled?.call(item) ??
-                                                    true;
-                                                return PopupMenuItem(
-                                                  enabled: enabled,
-                                                  value: enabled
-                                                      ? a.onTap
-                                                      : null,
-                                                  child: Text(
-                                                    a.label(item),
-                                                    style: enabled
-                                                        ? null
-                                                        : TextStyle(
-                                                            color: colorScheme
-                                                                .outline,
-                                                          ),
-                                                  ),
-                                                );
-                                              }).toList(),
-                                        ),
-                                  ),
-                                ],
+                    builder: (context, state, fetchNextPage) => PagedListView(
+                      shrinkWrap: true,
+                      state: state,
+                      fetchNextPage: fetchNextPage,
+                      builderDelegate: PagedChildBuilderDelegate<T>(
+                        noItemsFoundIndicatorBuilder: (context) =>
+                            Center(child: Text(l10n.no_elements_to_display)),
+                        itemBuilder: (context, item, index) => Container(
+                          height: 60,
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: ColorManager.surfaceActive,
                               ),
                             ),
                           ),
+                          child: Row(
+                            spacing: 8,
+                            children: [
+                              SizedBox(
+                                width: _checkboxColumnWidth,
+                                child: AppCheckBox(
+                                  checkBoxValue: selectedItems.contains(item),
+                                  onChanged: (newValue) => setState(() {
+                                    if (newValue == true) {
+                                      selectedItems.add(item);
+                                    } else {
+                                      selectedItems.remove(item);
+                                    }
+                                  }),
+                                ),
+                              ),
+                              Expanded(
+                                child: _SyncedHorizontalScroll(
+                                  offsetNotifier: _horizontalOffset,
+                                  child: SizedBox(
+                                    width: dataSectionWidth,
+                                    child: Row(
+                                      spacing: _columnSpacing,
+                                      children: [
+                                        ...orderedColumns.indexed.map(
+                                          (entry) => SizedBox(
+                                            width: effectiveWidths[entry.$1],
+                                            child: entry.$2.cellInfoAccessor(
+                                              item,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: _actionsColumnWidth,
+                                child:
+                                    PopupMenuButton<
+                                      FutureOr<void> Function(T)?
+                                    >(
+                                      tooltip: l10n.actions,
+                                      color: ColorManager.surfaceWhite,
+                                      onSelected: (value) => value?.call(item),
+                                      itemBuilder: (context) =>
+                                          widget.rowActions.map((a) {
+                                            final enabled =
+                                                a.isEnabled?.call(item) ?? true;
+                                            return PopupMenuItem(
+                                              enabled: enabled,
+                                              value: enabled ? a.onTap : null,
+                                              child: Text(
+                                                a.label(item),
+                                                style: enabled
+                                                    ? null
+                                                    : TextStyle(
+                                                        color: ColorManager
+                                                            .greyLighter,
+                                                      ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                    ),
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                    ),
                   ),
                 ],
               );

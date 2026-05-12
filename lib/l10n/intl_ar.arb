@@ -6,5 +6,95 @@
     "apply": "تطبيق",
     "reset": "إعادة تعيين",
     "actions": "الإجراءات",
-    "no_elements_to_display": "لا توجد عناصر لعرضها"
+    "no_elements_to_display": "لا توجد عناصر لعرضها",
+    "search": "بحث",
+    "articles": "مقالات",
+    "article": "مقالة",
+    "services": "خدمات",
+    "service": "خدمة",
+    "welcome_back": "مرحبا",
+    "home_description": "هنا آخر تحديثات المحتوى والخدمات",
+    "files": "الملفات",
+    "about_us": "من نحن",
+    "categories": "تصنيفات",
+    "category": "تصنيف",
+    "edit": "تعديل",
+    "vision": "الرؤية",
+    "mission": "الرسالة",
+    "qualifications": "المؤهلات",
+    "qualification": "مؤهل",
+    "experience": "الخبرة",
+    "description": "الوصف",
+    "add": "أضافة",
+    "see_more": "عرض المزيد",
+    "add_success": "تمت الإضافة بنجاح",
+    "edit_success": "تم التعديل بنجاح",
+    "delete_success": "تم الحذف بنجاح",
+    "service_addition": "إضافة خدمة",
+    "service_editing": "تعديل خدمة",
+    "save": "حفظ",
+    "close": "إغلاق",
+    "title": "العنوان",
+    "details": "التفاصيل",
+    "not_found": "غير موجود",
+    "image": "الصورة",
+    "click_to_upload": "اضغط للتحميل",
+    "service_details": "تفاصيل الخدمة",
+    "service_details_addition": "إضافة تفاصيل الخدمة",
+    "service_details_editing": "تعديل تفاصيل الخدمة",
+    "service_details_delete": "حذف تفاصيل الخدمة",
+    "article_addition": "إضافة مقال",
+    "article_editing": "تعديل مقال",
+    "item": "عنصر",
+    "clear": "مسح",
+    "content": "المحتوى",
+    "delete": "حذف",
+    "drag_and_drop_description": "اسحب وأسقط {value} هنا أو",
+    "@drag_and_drop_description": {
+        "placeholders": {
+            "value": {
+                "type": "int"
+            }
+        }
+    },
+    "add_something_of": "إضافة {something}",
+    "@add_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "edit_something_of": "تعديل {something}",
+    "@edit_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "delete_something_of": "حذف {something}",
+    "@delete_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "last_something_of": "آخر {something}",
+    "@last_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    },
+    "select_something_of": "اختر {something}",
+    "@select_something_of": {
+        "placeholders": {
+            "something": {
+                "type": "String"
+            }
+        }
+    }
 }

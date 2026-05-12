@@ -1,1 +1,5 @@
+analyzer:
+  errors:
+    strict_top_level_inference: ignore
+    use_null_aware_elements: ignore
 include: package:flutter_lints/flutter.yaml

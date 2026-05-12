@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "53886720426",
+    "project_id": "custom-dashboard-82cef",
+    "storage_bucket": "custom-dashboard-82cef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53886720426:android:f644fee17d1f9b113df3d3",
+        "android_client_info": {
+          "package_name": "com.example.custom_dashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZke1nkouXE48RHW4XAsKwNx5cBFVL6_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
