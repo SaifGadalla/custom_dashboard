@@ -1,7 +1,6 @@
 import '../../../common.dart';
 import '../../routes.dart';
 
-import '../services/add_or_edit_app_service/controller.dart';
 import '../services/add_or_edit_app_service/dialog.dart';
 import 'controller.dart';
 
@@ -23,7 +22,9 @@ class HomeView extends ConsumerWidget {
 
     final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
-    //TODO: find suitable replacement for BdayaLoadableAreaWrapper
+    if (ref.watch(homeProvider).isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Container(
       padding: EdgeInsets.all(32),
       child: SingleChildScrollView(
@@ -38,7 +39,7 @@ class HomeView extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AppText(
-                  '${l10n.welcome_back}, ${getIt<AuthService>().currentUser?.displayName ?? ''}!',
+                  '${l10n.welcome_back}, ${ref.watch(authServiceProvider).currentUser?.name ?? ''}!',
                   style: textTheme.headlineLarge?.copyWith(
                     color: ColorManager.greyNormal,
                   ),
@@ -71,15 +72,14 @@ class HomeView extends ConsumerWidget {
                   title: l10n.services,
                   number: servicesLength,
                   onPressed: () async {
-                    await AddOrEditAppServiceDialog.show(
+                    final result = await AddOrEditAppServiceDialog.show(
                       context,
-                      params: AddOrEditAppServiceParams(
-                        onSuccess: () async {
-                          await ref.read(homeProvider.notifier).getServices();
-                          await ref.read(homeProvider.notifier).getFiles();
-                        },
-                      ),
+                      null,
                     );
+                    if (result != null) {
+                      ref.read(homeProvider.notifier).getServices();
+                      ref.read(homeProvider.notifier).getFiles();
+                    }
                   },
                 ),
                 _buildNumberCard(

@@ -1,27 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Category {
   final String? id;
   final String? name;
-  final String? image;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  Category({this.id, this.name, this.image, this.createdAt, this.updatedAt});
+  Category({this.id, this.name, this.createdAt, this.updatedAt});
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id: json['id'],
       name: json['name'],
-      image: json['image'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      createdAt: _parseDateTime(json['createdAt']),
+      updatedAt: _parseDateTime(json['updatedAt']),
     );
+  }
+
+  static DateTime? _parseDateTime(dynamic value) {
+    if (value == null) return null;
+    if (value is Timestamp) return value.toDate();
+    if (value is DateTime) return value;
+    if (value is String) return DateTime.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
-      'image': image,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
     };
@@ -37,7 +44,6 @@ class Category {
     return Category(
       id: id ?? this.id,
       name: name ?? this.name,
-      image: image ?? this.image,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -45,6 +51,20 @@ class Category {
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name, image: $image, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Category(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+  
+    return other is Category &&
+      other.id == id &&
+      other.name == name;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ name.hashCode;
   }
 }

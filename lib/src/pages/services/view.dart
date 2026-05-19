@@ -1,5 +1,6 @@
+import 'package:custom_dashboard/src/pages/services/info_dialog.dart';
+
 import '../../../common.dart';
-import 'add_or_edit_app_service/controller.dart';
 import 'add_or_edit_app_service/dialog.dart';
 import 'controller.dart';
 
@@ -31,7 +32,9 @@ class _ServicesPageState extends ConsumerState<ServicesPage>
         return lastPage.last.id;
       },
       fetchPage: (String? pageKey) async {
-        return await ref.read(serviceControllerProvider.notifier).listServices(pageKey);
+        return await ref
+            .read(serviceControllerProvider.notifier)
+            .listServices(pageKey: pageKey);
       },
     );
   }
@@ -102,10 +105,7 @@ class _ServicesPageState extends ConsumerState<ServicesPage>
         return [
           AppButton(
             onTap: () async {
-              await AddOrEditAppServiceDialog.show(
-                context,
-                params: AddOrEditAppServiceParams(),
-              );
+              await AddOrEditAppServiceDialog.show(context, null);
             },
             icon: Icons.add,
             tooltip: '${l10n.add} ${l10n.service}',
@@ -113,7 +113,20 @@ class _ServicesPageState extends ConsumerState<ServicesPage>
           ),
         ];
       },
-      rowActions: const [],
+      rowActions: [
+        CardAction(
+          label: (item) => '${l10n.edit} ${l10n.service}',
+          onTap: (item) async {
+            await AddOrEditAppServiceDialog.show(context, item);
+          },
+        ),
+        CardAction(
+          label: (item) => 'View Details',
+          onTap: (item) async {
+            await ServiceInfoDialog.show(context, item);
+          },
+        ),
+      ],
       pagingController: _pagingController,
       searchFormGroup: searchFG,
       searchBarHint: l10n.search,

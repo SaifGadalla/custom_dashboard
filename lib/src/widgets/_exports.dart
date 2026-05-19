@@ -8,5 +8,7 @@ export 'app_drawer.dart';
 export 'home_card_icon.dart';
 export 'app_page/_exports.dart';
 export 'app_text_field.dart';
+export 'dialog_icon.dart';
 export 'reactive_dialog_image_section.dart';
 export 'reactive_drop_down_menu.dart';
+export 'form/details_section.dart';

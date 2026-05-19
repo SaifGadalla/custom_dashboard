@@ -1,38 +1,32 @@
 import '../common.dart';
 import '../generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toastification/toastification.dart';
 import 'routes.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ToastificationWrapper(
       config: const ToastificationConfig(alignment: Alignment.bottomRight),
-      child: ScreenUtilInit(
-        designSize: const Size(375, 812),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: ref.watch(routerProvider),
+        title: 'Custom Dashboard',
+        theme: AppTheme.theme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         builder: (context, child) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: routerConfig,
-            title: 'Custom Dashboard',
-            theme: AppTheme.theme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            builder: (context, child) {
-              return child ?? const SizedBox.shrink();
-            },
-          );
+          return child ?? const SizedBox.shrink();
         },
       ),
     );

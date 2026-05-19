@@ -16,7 +16,7 @@ class AppShellView extends StatelessWidget {
     return Scaffold(
       body: Row(
         children: [
-          AppDrawer(),
+          if (!isMobile) AppDrawer(),
           Expanded(child: child),
         ],
       ),

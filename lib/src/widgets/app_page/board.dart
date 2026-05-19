@@ -37,7 +37,6 @@ class AppBoard<T> extends StatelessWidget {
       desktop: false,
     );
 
-    //TODO: find a suitable replacment for bdayaLoadableArea
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import '../../../common.dart';
 
 abstract class AuthService {
-  User? get currentUser;
-  Future<void> signIn();
+  AppUser? get currentUser;
+  Future<AppUser> signIn(String email, String password);
   Future<void> signOut();
 }

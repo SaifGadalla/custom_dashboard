@@ -1,7 +1,5 @@
 import '../../../common.dart';
 
-@dev
-@LazySingleton(as: AboutUsService)
 class FakeAboutUsService implements AboutUsService {
   // store about us in memory
   AboutUs _aboutUs = AboutUs(

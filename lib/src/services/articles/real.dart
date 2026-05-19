@@ -1,28 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../common.dart';
+import '../firestore_service.dart';
 
-@prod
-@LazySingleton(as: ArticleService)
 class RealArticleService extends ArticleService {
+  final FirestoreService _fs;
+
+  RealArticleService(this._fs);
+
   @override
   Future<Article?> create(Article article) async {
-    final ref = FirebaseFirestore.instance.collection('articles');
-    final doc = ref.doc();
+    final ref = _fs.articles.doc();
 
     final newArticle = article.copyWith(
-      id: Uuid().v4(),
+      id: ref.id,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
-    await doc.set(newArticle.toJson());
+    await ref.set(newArticle);
     return newArticle;
   }
 
   @override
   Future<Article?> update(Article article) async {
-    final ref = FirebaseFirestore.instance
-        .collection('articles')
-        .doc(article.id);
+    final ref = _fs.articles.doc(article.id);
     final updatedArticle = article.copyWith(updatedAt: DateTime.now());
     await ref.update(updatedArticle.toJson());
     return updatedArticle;
@@ -30,40 +30,43 @@ class RealArticleService extends ArticleService {
 
   @override
   Future<void> delete(String id) async {
-    final ref = FirebaseFirestore.instance.collection('articles').doc(id);
+    final ref = _fs.articles.doc(id);
     await ref.delete();
   }
 
   @override
   Future<Article?> get(String id) async {
-    final ref = FirebaseFirestore.instance.collection('articles').doc(id);
+    final ref = _fs.articles.doc(id);
     final doc = await ref.get();
     if (!doc.exists) {
       AppToast.show("Article not found");
       return null;
     } else {
-      return Article.fromJson(doc.data()!);
+      return doc.data();
     }
   }
 
   @override
-  Future<List<Article>> list(String? pageKey) async {
-    Query query = FirebaseFirestore.instance
-        .collection('articles')
-        .orderBy('createdAt')
-        .limit(kPageSize);
+  Future<List<Article>> list({String? pageKey, String? query}) async {
+    Query<Article> query_ = _fs.articles.orderBy('title');
 
-    // pageKey is empty string on first load
-    if (pageKey?.isNotEmpty ?? false) {
-      // Fetch the cursor document, then paginate after it
-      final cursorDoc = await FirebaseFirestore.instance
-          .collection('articles')
-          .doc(pageKey)
-          .get();
-      query = query.startAfterDocument(cursorDoc);
+    // Prefix search on title
+    if (query != null && query.isNotEmpty) {
+      final end = query.substring(0, query.length - 1) +
+          String.fromCharCode(query.codeUnitAt(query.length - 1) + 1);
+      query_ = query_
+          .where('title', isGreaterThanOrEqualTo: query)
+          .where('title', isLessThan: end);
     }
 
-    final snap = await query.get() as QuerySnapshot<Map<String, dynamic>>;
-    return snap.docs.map((doc) => Article.fromJson(doc.data())).toList();
+    query_ = query_.limit(kPageSize);
+
+    if (pageKey?.isNotEmpty ?? false) {
+      final cursorDoc = await _fs.articles.doc(pageKey).get();
+      query_ = query_.startAfterDocument(cursorDoc);
+    }
+
+    final snap = await query_.get();
+    return snap.docs.map((doc) => doc.data()).toList();
   }
 }

@@ -1,8 +1,8 @@
 import '../../../common.dart';
 
 abstract class FileService {
-  Future<File> upload(File file);
+  Future<AppFile> upload(AppFile file);
   Future<void> delete(String id);
-  Future<File?> get(String id);
-  Future<List<File>> list(String? pageKey);
+  Future<AppFile?> get(String id);
+  Future<List<AppFile>> list(String? pageKey, {String? query});
 }

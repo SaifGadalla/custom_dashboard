@@ -1,5 +1,4 @@
 import '../../common.dart';
-// TODO add a suitable replacment for loadable areas
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -13,7 +12,7 @@ class AppButton extends StatelessWidget {
     this.isSmallScreen = false,
     this.icon,
     // this.area,
-    this.tooltip,
+    required this.tooltip,
     this.isLoading = false,
   });
 
@@ -25,14 +24,11 @@ class AppButton extends StatelessWidget {
   final BorderSide? side;
   final bool isSmallScreen;
   final IconData? icon;
-  final String? tooltip;
+  final String tooltip;
   final bool isLoading;
-  // final SharedValue<BdayaLoadableArea>? area;
 
   @override
   Widget build(BuildContext context) {
-    // final isLoading = area?.of(context).isLoading ?? false;
-
     final iconButton = IconButton(
       tooltip: tooltip,
       style: ButtonStyle(

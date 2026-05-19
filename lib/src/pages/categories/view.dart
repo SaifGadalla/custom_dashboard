@@ -1,3 +1,5 @@
+import 'package:custom_dashboard/src/pages/categories/add_or_edit_category/dialog.dart';
+
 import '../../../common.dart';
 
 import 'controller.dart';
@@ -30,9 +32,10 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
         return lastPage.last.id;
       },
       fetchPage: (String? pageKey) async {
+        final query = searchFG.control(kSearchFCN).value as String?;
         return await ref
             .read(categoriesControllerProvider.notifier)
-            .listCategories(pageKey);
+            .listCategories(pageKey: pageKey, query: query);
       },
     );
   }
@@ -50,19 +53,6 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
       pageHeadline: l10n.categories,
       tableLabel: l10n.categories,
       tableColumns: [
-        ColumnDefinition<Category>(
-          minWidth: 40,
-          flex: 0,
-          cellInfoAccessor: (e) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kBorderRadius),
-            ),
-            height: 40,
-            width: 40,
-            child: AppNetworkImage(url: e.image ?? ''),
-          ),
-          label: SizedBox(width: 40),
-        ),
         ColumnDefinition(
           minWidth: 40,
           cellInfoAccessor: (item) {
@@ -111,15 +101,15 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
       tableActionsBuilder: (context, items, onRefresh) {
         return [
           AppButton(
-            // onTap: () async {
-            //   await AddOrEditArticleDialog.show(
-            //     context,
-            //     params: AddOrEditArticleDialogParams(),
-            //   );
-            // },
+            onTap: () async {
+              final result = await AddOrEditCategoryDialog.show(context, null);
+              if (result != null) {
+                _pagingController.refresh();
+              }
+            },
             icon: Icons.add,
-            tooltip: '${l10n.add} ${l10n.article}',
-            child: AppText('${l10n.add} ${l10n.article}'),
+            tooltip: '${l10n.add} ${l10n.category}',
+            child: AppText('${l10n.add} ${l10n.category}'),
           ),
         ];
       },
@@ -127,6 +117,9 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
       pagingController: _pagingController,
       searchFormGroup: searchFG,
       searchBarHint: l10n.search,
+      onSearchFieldChanged: (p0) {
+        _pagingController.refresh();
+      },
     );
   }
 }

@@ -1,20 +1,39 @@
-import '../../../common.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../../common.dart';
 
-@prod
-@LazySingleton(as: AuthService)
 class RealAuthService extends AuthService {
-  @override
-  // TODO: implement currentUser
-  User? get currentUser => null;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
-  Future<void> signIn() async {
-    // TODO: implement signIn
+  AppUser? get currentUser {
+    final user = _auth.currentUser;
+    if (user == null) return null;
+    return AppUser(
+      id: user.uid,
+      name: user.displayName ?? 'Admin',
+      email: user.email ?? 'admin@email.com',
+    );
+  }
+
+  @override
+  Future<AppUser> signIn(String email, String password) async {
+    final cred = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final user = cred.user;
+    if (user != null) {
+      return AppUser(
+        id: user.uid,
+        name: user.displayName ?? 'Admin',
+        email: user.email ?? email,
+      );
+    }
+    throw Exception('Failed to sign in');
   }
 
   @override
   Future<void> signOut() async {
-    // TODO: implement signOut
+    await _auth.signOut();
   }
 }

@@ -1,20 +1,21 @@
 import '../../../common.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-@dev
-@LazySingleton(as: AuthService)
 class FakeAuthService extends AuthService {
-  @override
-  // TODO: implement currentUser
-  User? get currentUser => null;
+  AppUser? _currentUser;
 
   @override
-  Future<void> signIn() async {
-    // TODO: implement signIn
+  AppUser? get currentUser => _currentUser;
+
+  @override
+  Future<AppUser> signIn(String email, String password) async {
+    await Future.delayed(const Duration(seconds: 1));
+    _currentUser = AppUser(id: '1', name: 'Admin', email: email);
+    return _currentUser!;
   }
 
   @override
   Future<void> signOut() async {
-    // TODO: implement signOut
+    await Future.delayed(const Duration(seconds: 1));
+    _currentUser = null;
   }
 }

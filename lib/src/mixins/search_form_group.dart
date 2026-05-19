@@ -1,5 +1,7 @@
 import '../../common.dart';
 
 mixin SearchFormGroup {
-  FormGroup get searchFG => FormGroup({kSearchFCN: FormControl<String>()});
+  late final FormGroup searchFG = FormGroup({
+    kSearchFCN: FormControl<String>(),
+  });
 }

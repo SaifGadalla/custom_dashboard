@@ -1,6 +1,6 @@
 import '../../../common.dart';
-import 'add_or_edit_app_article/controller.dart';
 import 'add_or_edit_app_article/dialog.dart';
+import 'info_dialog.dart';
 
 import 'controller.dart';
 
@@ -19,22 +19,18 @@ class _ArticlesPageState extends ConsumerState<ArticlesPage>
   void initState() {
     super.initState();
     _pagingController = PagingController<String?, Article>(
-      getNextPageKey: (PagingState<String?, Article> state) {
+      getNextPageKey: (state) {
         final pages = state.pages;
-        // No pages loaded yet — return empty string to trigger first fetch
         if (pages == null || pages.isEmpty) return '';
-
-        // Last page was smaller than page size — no more pages
         final lastPage = pages.last;
         if (lastPage.length < kPageSize) return null;
-
-        // Use the last document ID as the cursor for the next page
         return lastPage.last.id;
       },
       fetchPage: (String? pageKey) async {
+        final query = searchFG.control(kSearchFCN).value as String?;
         return await ref
             .read(articleControllerProvider.notifier)
-            .listArticles(pageKey: pageKey);
+            .listArticles(pageKey: pageKey, query: query);
       },
     );
   }
@@ -106,10 +102,10 @@ class _ArticlesPageState extends ConsumerState<ArticlesPage>
         return [
           AppButton(
             onTap: () async {
-              await AddOrEditArticleDialog.show(
-                context,
-                params: AddOrEditArticleDialogParams(),
-              );
+              final result = await AddOrEditArticleDialog.show(context, null);
+              if (result != null) {
+                _pagingController.refresh();
+              }
             },
             icon: Icons.add,
             tooltip: '${l10n.add} ${l10n.article}',
@@ -117,10 +113,29 @@ class _ArticlesPageState extends ConsumerState<ArticlesPage>
           ),
         ];
       },
-      rowActions: const [],
+      rowActions: [
+        CardAction(
+          label: (item) => 'View Details',
+          onTap: (item) async {
+            await ArticleInfoDialog.show(context, item);
+          },
+        ),
+        CardAction(
+          label: (item) => '${l10n.edit} ${l10n.article}',
+          onTap: (item) async {
+            final result = await AddOrEditArticleDialog.show(context, item);
+            if (result != null) {
+              _pagingController.refresh();
+            }
+          },
+        ),
+      ],
       pagingController: _pagingController,
       searchFormGroup: searchFG,
       searchBarHint: l10n.search,
+      onSearchFieldChanged: (p0) {
+        _pagingController.refresh();
+      },
     );
   }
 }

@@ -5,6 +5,7 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     textTheme: textTheme,
+    scaffoldBackgroundColor: ColorManager.surfaceLight,
     searchBarTheme: SearchBarThemeData(
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(

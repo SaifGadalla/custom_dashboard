@@ -1,7 +1,5 @@
 import '../../../common.dart';
 
-@dev
-@LazySingleton(as: ArticleService)
 class FakeArticleService extends ArticleService {
   final List<Article> articles = List.generate(
     5,
@@ -13,7 +11,6 @@ class FakeArticleService extends ArticleService {
       category: Category(
         id: '1',
         name: 'Category 1',
-        image: '',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
@@ -72,19 +69,22 @@ class FakeArticleService extends ArticleService {
   }
 
   @override
-  Future<List<Article>> list(String? pageKey) async {
+  Future<List<Article>> list({String? pageKey, String? query}) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
-    // First page: no cursor
+    // Apply title filter first
+    final filtered = (query == null || query.isEmpty)
+        ? articles
+        : articles
+              .where((a) => a.title.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+
     if (pageKey == null || pageKey.isEmpty) {
-      return articles.take(kPageSize).toList();
+      return filtered.take(kPageSize).toList();
     }
 
-    // Find the cursor index and return items after it
-    final cursorIndex = articles.indexWhere((s) => s.id == pageKey);
-    if (cursorIndex == -1 || cursorIndex + 1 >= articles.length) {
-      return [];
-    }
-    return articles.skip(cursorIndex + 1).take(kPageSize).toList();
+    final cursorIndex = filtered.indexWhere((s) => s.id == pageKey);
+    if (cursorIndex == -1 || cursorIndex + 1 >= filtered.length) return [];
+    return filtered.skip(cursorIndex + 1).take(kPageSize).toList();
   }
 }

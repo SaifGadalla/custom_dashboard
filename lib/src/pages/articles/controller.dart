@@ -16,30 +16,35 @@ class ArticlesState {
     bool? isLoading,
     List<Article>? articles,
   }) {
-    return ArticlesState(articles: articles ?? this.articles);
+    return ArticlesState(
+      pageKey: pageKey ?? this.pageKey,
+      isLoading: isLoading ?? this.isLoading,
+      articles: articles ?? this.articles,
+    );
   }
 }
 
 final articleControllerProvider =
     NotifierProvider<ArticlesController, ArticlesState>(
-      () => ArticlesController(getIt.get<ArticleService>()),
+      () => ArticlesController(),
     );
 
-@lazySingleton
 class ArticlesController extends Notifier<ArticlesState> {
-  ArticlesController(this.articleService);
-  final ArticleService articleService;
+  ArticleService get articleService => ref.read(articleServiceProvider);
 
   @override
   ArticlesState build() {
     return ArticlesState();
   }
 
-  Future<List<Article>> listArticles({String? pageKey}) async {
+  Future<List<Article>> listArticles({String? pageKey, String? query}) async {
     if (state.isLoading) return [];
     state = state.copyWith(isLoading: true);
     try {
-      final articles = await articleService.list(pageKey);
+      final articles = await articleService.list(
+        pageKey: pageKey,
+        query: query,
+      );
       state = state.copyWith(articles: articles, isLoading: false);
       return articles;
     } catch (e) {

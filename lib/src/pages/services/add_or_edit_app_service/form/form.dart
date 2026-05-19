@@ -50,9 +50,13 @@ class ServiceModelForm {
   }
 
   static ServiceModelForm fromFormGroup(FormGroup formGroup) {
+    final rawDetails = formGroup.control(detailsControlName).value;
+    final details = (rawDetails is List)
+        ? rawDetails.whereType<String>().toList()
+        : <String>[];
     return ServiceModelForm(
       name: formGroup.control(nameControlName).value,
-      details: formGroup.control(detailsControlName).value,
+      details: details,
       image: formGroup.control(imageControlName).value,
       createdAt: formGroup.control(createdAtControlName).value,
       updatedAt: formGroup.control(updatedAtControlName).value,

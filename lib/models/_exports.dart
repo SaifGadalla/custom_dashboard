@@ -3,3 +3,4 @@ export 'service.dart';
 export 'category.dart';
 export 'file.dart';
 export 'about_us.dart';
+export 'user.dart';

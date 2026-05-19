@@ -384,6 +384,186 @@ class S {
     return Intl.message('Delete', name: 'delete', desc: '', args: []);
   }
 
+  /// `Delete all`
+  String get delete_all {
+    return Intl.message('Delete all', name: 'delete_all', desc: '', args: []);
+  }
+
+  /// `Total`
+  String get total {
+    return Intl.message('Total', name: 'total', desc: '', args: []);
+  }
+
+  /// `Videos`
+  String get videos {
+    return Intl.message('Videos', name: 'videos', desc: '', args: []);
+  }
+
+  /// `Images`
+  String get images {
+    return Intl.message('Images', name: 'images', desc: '', args: []);
+  }
+
+  /// `Refresh`
+  String get refresh {
+    return Intl.message('Refresh', name: 'refresh', desc: '', args: []);
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Sign in`
+  String get sign_in {
+    return Intl.message('Sign in', name: 'sign_in', desc: '', args: []);
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
+
+  /// `Don't have an account?`
+  String get no_account {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'no_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get sign_up {
+    return Intl.message('Sign up', name: 'sign_up', desc: '', args: []);
+  }
+
+  /// `Forgot password?`
+  String get forgot_password {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgot_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password`
+  String get reset_password {
+    return Intl.message(
+      'Reset password',
+      name: 'reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send reset link`
+  String get send_reset_link {
+    return Intl.message(
+      'Send reset link',
+      name: 'send_reset_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to login`
+  String get back_to_login {
+    return Intl.message(
+      'Back to login',
+      name: 'back_to_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get or {
+    return Intl.message('or', name: 'or', desc: '', args: []);
+  }
+
+  /// `[EMAIL_ADDRESS]`
+  String get email_hint {
+    return Intl.message(
+      '[EMAIL_ADDRESS]',
+      name: 'email_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your password`
+  String get password_hint {
+    return Intl.message(
+      'Enter your password',
+      name: 'password_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get required {
+    return Intl.message(
+      'This field is required',
+      name: 'required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email`
+  String get invalid_email {
+    return Intl.message(
+      'Please enter a valid email',
+      name: 'invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get password_too_short {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'password_too_short',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your credentials to continue`
+  String get enter_credentials_to_continue {
+    return Intl.message(
+      'Enter your credentials to continue',
+      name: 'enter_credentials_to_continue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login failed: Invalid credentials`
+  String get login_failed_invalid_credentials {
+    return Intl.message(
+      'Login failed: Invalid credentials',
+      name: 'login_failed_invalid_credentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
   /// `Drag and drop {value} here or`
   String drag_and_drop_description(int value) {
     return Intl.message(

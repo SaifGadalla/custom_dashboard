@@ -1,25 +1,23 @@
-export 'package:cached_network_image/cached_network_image.dart';
-export 'package:collection/collection.dart';
 export 'package:custom_dashboard/models/_exports.dart';
 export 'package:custom_dashboard/src/extensions/_exports.dart';
 export 'package:custom_dashboard/src/mixins/_exports.dart';
 export 'package:custom_dashboard/src/services/_exports.dart';
 export 'package:custom_dashboard/src/utils/_exports.dart';
 export 'package:custom_dashboard/src/widgets/_exports.dart';
+
 export 'package:fixnum/fixnum.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:flutter_svg/flutter_svg.dart';
-export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-export 'package:injectable/injectable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:logging/logging.dart';
 export 'package:reactive_forms/reactive_forms.dart';
 export 'package:responsive_builder/responsive_builder.dart' hide WidgetBuilder;
 export 'package:uuid/uuid.dart';
-
-export 'get_it_config.dart';
+export 'package:file_picker/file_picker.dart';
+export 'package:cached_network_image/cached_network_image.dart';
+export 'package:collection/collection.dart';

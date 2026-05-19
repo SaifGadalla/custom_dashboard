@@ -4,7 +4,7 @@ import '../../../common.dart';
 class HomeState {
   final List<Article> articles;
   final List<Service> services;
-  final List<File> files;
+  final List<AppFile> files;
   final AboutUs aboutUs;
   final bool isLoading;
 
@@ -19,7 +19,7 @@ class HomeState {
   HomeState copyWith({
     List<Article>? articles,
     List<Service>? services,
-    List<File>? files,
+    List<AppFile>? files,
     AboutUs? aboutUs,
     bool? isLoading,
   }) {
@@ -34,27 +34,14 @@ class HomeState {
 }
 
 final homeProvider = NotifierProvider<HomeController, HomeState>(
-  () => HomeController(
-    getIt<ArticleService>(),
-    getIt<ServiceService>(),
-    getIt<FileService>(),
-    getIt<AboutUsService>(),
-  ),
+  () => HomeController(),
 );
 
-@lazySingleton
 class HomeController extends Notifier<HomeState> {
-  HomeController(
-    this.articlesService,
-    this.servicesService,
-    this.filesService,
-    this.aboutUsService,
-  );
-
-  final ArticleService articlesService;
-  final ServiceService servicesService;
-  final FileService filesService;
-  final AboutUsService aboutUsService;
+  ArticleService get articlesService => ref.read(articleServiceProvider);
+  ServiceService get servicesService => ref.read(serviceServiceProvider);
+  FileService get filesService => ref.read(fileServiceProvider);
+  AboutUsService get aboutUsService => ref.read(aboutUsServiceProvider);
 
   @override
   HomeState build() {
@@ -72,7 +59,7 @@ class HomeController extends Notifier<HomeState> {
 
   Future<void> getArticles() async {
     try {
-      final articles = await articlesService.list(null);
+      final articles = await articlesService.list(pageKey: null, query: null);
       state = state.copyWith(articles: articles);
     } catch (e) {
       // Handle error

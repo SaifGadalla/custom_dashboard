@@ -1,4 +1,6 @@
-class File {
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class AppFile {
   final String id;
   final String name;
   final String url;
@@ -6,7 +8,7 @@ class File {
   final int size;
   final DateTime createdAt;
 
-  File({
+  AppFile({
     required this.id,
     required this.name,
     required this.url,
@@ -15,15 +17,23 @@ class File {
     required this.createdAt,
   });
 
-  factory File.fromJson(Map<String, dynamic> json) {
-    return File(
+  factory AppFile.fromJson(Map<String, dynamic> json) {
+    return AppFile(
       id: json['id'],
       name: json['name'],
       url: json['url'],
       type: json['type'],
       size: json['size'],
-      createdAt: json['createdAt'],
+      createdAt: _parseDateTime(json['createdAt']) ?? DateTime.now(),
     );
+  }
+
+  static DateTime? _parseDateTime(dynamic value) {
+    if (value == null) return null;
+    if (value is Timestamp) return value.toDate();
+    if (value is DateTime) return value;
+    if (value is String) return DateTime.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() {
@@ -37,7 +47,7 @@ class File {
     };
   }
 
-  File copyWith({
+  AppFile copyWith({
     String? id,
     String? name,
     String? url,
@@ -45,7 +55,7 @@ class File {
     int? size,
     DateTime? createdAt,
   }) {
-    return File(
+    return AppFile(
       id: id ?? this.id,
       name: name ?? this.name,
       url: url ?? this.url,

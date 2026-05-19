@@ -7,6 +7,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentPath = GoRouterState.of(context).matchedLocation;
     return Drawer(
+      backgroundColor: ColorManager.surfaceWhite,
       child: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16),
         children: [
